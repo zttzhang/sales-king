@@ -1,0 +1,6 @@
+<!--pages/admin/regions/regions.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">区域管理功能开发中...</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<!--pages/admin/products/products.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">商品管理功能开发中...</text>
+  </view>
+</view>

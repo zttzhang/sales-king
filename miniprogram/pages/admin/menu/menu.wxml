@@ -1,0 +1,21 @@
+<!--pages/admin/menu/menu.wxml-->
+<view class="container">
+  <view class="card">
+    <navigator url="/pages/admin/regions/regions" class="menu-item">
+      <text>区域管理</text>
+      <text class="arrow">›</text>
+    </navigator>
+    <navigator url="/pages/admin/stores/stores" class="menu-item">
+      <text>门店管理</text>
+      <text class="arrow">›</text>
+    </navigator>
+    <navigator url="/pages/admin/products/products" class="menu-item">
+      <text>商品管理</text>
+      <text class="arrow">›</text>
+    </navigator>
+    <navigator url="/pages/admin/customers/customers" class="menu-item">
+      <text>客户管理</text>
+      <text class="arrow">›</text>
+    </navigator>
+  </view>
+</view>

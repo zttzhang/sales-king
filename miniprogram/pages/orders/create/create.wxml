@@ -1,0 +1,6 @@
+<!--pages/orders/create/create.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">订单创建功能开发中...</text>
+  </view>
+</view>

@@ -1,0 +1,38 @@
+<!--pages/stores/list/list.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar card">
+    <input 
+      class="search-input" 
+      placeholder="搜索门店名称" 
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearch"
+    />
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+
+  <!-- 门店列表 -->
+  <view class="store-list">
+    <navigator 
+      url="/pages/stores/detail/detail?id={{item.storeId}}" 
+      class="list-item"
+      wx:for="{{stores}}"
+      wx:key="storeId"
+    >
+      <view class="list-item-title">{{item.storeName}}</view>
+      <view class="list-item-desc">{{item.address || '暂无地址'}}</view>
+      <view class="list-item-meta">
+        <text class="tag tag-info">{{item.regionName || '未分配区域'}}</text>
+      </view>
+    </navigator>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && stores.length === 0}}">
+    暂无门店数据
+  </view>
+</view>

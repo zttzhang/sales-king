@@ -1,0 +1,27 @@
+/* pages/stores/detail/detail.wxss */
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.action-section {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+}

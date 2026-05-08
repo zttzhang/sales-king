@@ -1,0 +1,31 @@
+/* pages/stores/list/list.wxss */
+.search-bar {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  background: #1890ff;
+  color: #ffffff;
+  border-radius: 8rpx;
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  line-height: normal;
+}
+
+.store-list {
+  margin-top: 20rpx;
+}
+
+.list-item-meta {
+  margin-top: 10rpx;
+}

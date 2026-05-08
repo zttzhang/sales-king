@@ -1,0 +1,148 @@
+/* pages/dashboard/dashboard.wxss */
+
+/* 时间范围选择 */
+.range-selector {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+}
+
+.range-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #666666;
+  border-radius: 8rpx;
+  transition: all 0.3s;
+}
+
+.range-item.active {
+  background: #1890ff;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 统计区域 */
+.stat-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 20rpx;
+  padding: 0 20rpx;
+}
+
+.stat-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  padding: 0 20rpx;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 200rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12rpx;
+  padding: 30rpx 20rpx;
+  color: #ffffff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.stat-card-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-card-success {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-card-warning {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-card-info {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.stat-card-default {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* 快捷导航 */
+.nav-section {
+  margin-bottom: 30rpx;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 10rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.nav-item:active {
+  background: #e9ecef;
+  transform: scale(0.95);
+}
+
+.nav-icon {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.nav-text {
+  font-size: 24rpx;
+  color: #333333;
+}
+
+/* 管理员区域 */
+.admin-section {
+  padding: 0 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.admin-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff7e6;
+  border: 1rpx solid #ffd591;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #fa8c16;
+}
+
+.arrow {
+  font-size: 40rpx;
+  font-weight: bold;
+}

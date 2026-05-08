@@ -1,0 +1,26 @@
+需要手动修复的文件列表（将 Page({ { 改为 Page({  {）：
+
+1. miniprogram/pages/stores/list/list.js - 第6行
+2. miniprogram/pages/stores/detail/detail.js - 第5行
+3. miniprogram/pages/visits/list/list.js - 第6行
+4. miniprogram/pages/visits/create/create.js - 第7行
+5. miniprogram/pages/orders/list/list.js - 第6行
+6. miniprogram/pages/orders/create/create.js - 第3行
+7. miniprogram/pages/orders/detail/detail.js - 第3行
+8. miniprogram/pages/admin/stores/stores.js - 第3行
+9. miniprogram/pages/admin/products/products.js - 第3行
+
+在每个文件中找到：
+Page({
+   {
+
+改为：
+Page({
+   {
+
+或者使用VS Code全局查找替换：
+1. 按 Ctrl+Shift+H
+2. 启用正则表达式
+3. 查找：Page\(\{\n   \{
+4. 替换为：Page({\n   {
+5. 在 miniprogram/pages 目录中替换所有

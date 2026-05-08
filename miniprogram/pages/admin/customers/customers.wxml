@@ -1,0 +1,6 @@
+<!--pages/admin/customers/customers.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">客户管理功能开发中...</text>
+  </view>
+</view>

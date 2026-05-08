@@ -1,0 +1,16 @@
+<!--pages/visits/list/list.wxml-->
+<view class="container">
+  <view class="list-item" wx:for="{{visits}}" wx:key="visitId">
+    <view class="list-item-title">{{item.storeName}}</view>
+    <view class="list-item-desc">
+      <text>{{item.visitTime}}</text>
+      <text class="tag tag-{{item.result === 'ordered' ? 'success' : 'info'}} ml-10">
+        {{item.resultText}}
+      </text>
+    </view>
+    <view class="list-item-desc" wx:if="{{item.notes}}">{{item.notes}}</view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="empty-state" wx:if="{{!loading && visits.length === 0}}">暂无拜访记录</view>
+</view>

@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/dashboard/dashboard",
+    "pages/stores/list/list",
+    "pages/stores/detail/detail",
+    "pages/visits/list/list",
+    "pages/visits/create/create",
+    "pages/orders/list/list",
+    "pages/orders/create/create",
+    "pages/orders/detail/detail",
+    "pages/admin/menu/menu",
+    "pages/admin/regions/regions",
+    "pages/admin/stores/stores",
+    "pages/admin/products/products",
+    "pages/admin/customers/customers"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "销售管理系统",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于记录拜访位置"
+    }
+  },
+  "requiredBackgroundModes": [],
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

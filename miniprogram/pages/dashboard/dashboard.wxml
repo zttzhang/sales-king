@@ -1,0 +1,102 @@
+<!--pages/dashboard/dashboard.wxml-->
+<view class="container">
+  <!-- 时间范围选择 -->
+  <view class="range-selector card">
+    <view 
+      class="range-item {{selectedRange === 'today' ? 'active' : ''}}"
+      bindtap="onRangeChange"
+      data-range="today"
+    >
+      今日
+    </view>
+    <view 
+      class="range-item {{selectedRange === 'week' ? 'active' : ''}}"
+      bindtap="onRangeChange"
+      data-range="week"
+    >
+      本周
+    </view>
+    <view 
+      class="range-item {{selectedRange === 'month' ? 'active' : ''}}"
+      bindtap="onRangeChange"
+      data-range="month"
+    >
+      本月
+    </view>
+  </view>
+
+  <!-- 拜访统计 -->
+  <view class="stat-section">
+    <view class="section-title">拜访统计</view>
+    <view class="stat-cards">
+      <view class="stat-card stat-card-primary">
+        <view class="stat-value">{{visitStats.visitsCount || 0}}</view>
+        <view class="stat-label">拜访次数</view>
+      </view>
+      <view class="stat-card stat-card-success">
+        <view class="stat-value">{{visitStats.orderedVisitsCount || 0}}</view>
+        <view class="stat-label">下单次数</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 销售统计 -->
+  <view class="stat-section">
+    <view class="section-title">销售统计</view>
+    <view class="stat-cards">
+      <view class="stat-card stat-card-warning">
+        <view class="stat-value">¥{{salesStats.salesAmount || '0.00'}}</view>
+        <view class="stat-label">销售额</view>
+      </view>
+      <view class="stat-card stat-card-info">
+        <view class="stat-value">{{salesStats.ordersCount || 0}}</view>
+        <view class="stat-label">订单数</view>
+      </view>
+      <view class="stat-card stat-card-default">
+        <view class="stat-value">{{salesStats.totalQty || 0}}</view>
+        <view class="stat-label">销量（件）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷导航 -->
+  <view class="nav-section card">
+    <view class="section-title">快捷导航</view>
+    <view class="nav-grid">
+      <navigator url="/pages/stores/list/list" class="nav-item">
+        <text class="nav-icon">🏪</text>
+        <text class="nav-text">门店</text>
+      </navigator>
+      <navigator url="/pages/visits/list/list" class="nav-item">
+        <text class="nav-icon">📝</text>
+        <text class="nav-text">拜访</text>
+      </navigator>
+      <navigator url="/pages/orders/list/list" class="nav-item">
+        <text class="nav-icon">📦</text>
+        <text class="nav-text">订单</text>
+      </navigator>
+      <navigator url="/pages/visits/create/create" class="nav-item">
+        <text class="nav-icon">➕</text>
+        <text class="nav-text">新建拜访</text>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 管理员入口 -->
+  <view class="admin-section" wx:if="{{isAdmin}}">
+    <navigator url="/pages/admin/menu/menu" class="admin-link">
+      <text>🔧 管理员功能</text>
+      <text class="arrow">›</text>
+    </navigator>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && !visitStats.visitsCount && !salesStats.ordersCount}}">
+    <text>暂无数据</text>
+  </view>
+</view>

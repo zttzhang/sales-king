@@ -1,0 +1,6 @@
+<!--pages/orders/detail/detail.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">订单详情功能开发中...</text>
+  </view>
+</view>

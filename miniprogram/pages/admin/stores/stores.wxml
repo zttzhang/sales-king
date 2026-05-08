@@ -1,0 +1,6 @@
+<!--pages/admin/stores/stores.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="section-title">门店管理功能开发中...</text>
+  </view>
+</view>

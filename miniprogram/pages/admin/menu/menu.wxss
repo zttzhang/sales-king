@@ -1,0 +1,19 @@
+/* pages/admin/menu/menu.wxss */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.arrow {
+  font-size: 40rpx;
+  color: #999999;
+}
