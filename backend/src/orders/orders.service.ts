@@ -21,28 +21,22 @@ export class OrdersService {
     }
 
     const lines = dto.lines.map((item) => {
-      const quantity = item.quantity;
-      const unitPrice = item.unitPrice;
+      const qty = item.qty;
+      const price = item.price;
       const discountAmount = item.discountAmount ?? 0;
 
       // Validate quantity is positive
-      if (quantity <= 0) {
+      if (qty <= 0) {
         throw new BadRequestException('Quantity must be greater than 0');
       }
 
-      // Validate discount does not exceed line total
-      const lineTotal = quantity * unitPrice;
-      if (discountAmount > lineTotal) {
-        throw new BadRequestException(
-          'Discount amount cannot exceed line total',
-        );
-      }
+      // Calculate line amount
+      const lineAmount = item.lineAmount ?? (qty * price - discountAmount);
 
-      const lineAmount = lineTotal - discountAmount;
       return {
         productId: item.productId,
-        qty: quantity,
-        unitPrice,
+        qty,
+        unitPrice: price,
         discountAmount,
         lineAmount,
       };
@@ -60,7 +54,7 @@ export class OrdersService {
         notes: dto.notes,
         totalAmount,
         totalQty,
-        status: dto.status ?? 'PENDING',
+        status: (dto.status as any) || 'PENDING',
         lines: {
           create: lines,
         },
@@ -144,15 +138,15 @@ export class OrdersService {
     }
     if (dto.orderDate) data.orderDate = new Date(dto.orderDate);
     if (dto.notes !== undefined) data.notes = dto.notes;
-    if (dto.status) data.status = dto.status;
+    if (dto.status) data.status = dto.status as any;
 
     if (dto.lines) {
       const lines = dto.lines.map((item) => ({
         productId: item.productId,
-        qty: item.quantity,
-        unitPrice: item.unitPrice,
+        qty: item.qty,
+        unitPrice: item.price,
         discountAmount: item.discountAmount ?? 0,
-        lineAmount: item.quantity * item.unitPrice - (item.discountAmount ?? 0),
+        lineAmount: item.lineAmount ?? (item.qty * item.price - (item.discountAmount ?? 0)),
       }));
       const totalAmount = lines.reduce((sum, item) => sum + item.lineAmount, 0);
       const totalQty = lines.reduce((sum, item) => sum + item.qty, 0);

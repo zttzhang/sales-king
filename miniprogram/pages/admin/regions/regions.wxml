@@ -1,6 +1,72 @@
 <!--pages/admin/regions/regions.wxml-->
 <view class="container">
-  <view class="card">
-    <text class="section-title">区域管理功能开发中...</text>
+  <!-- 搜索区域 -->
+  <view class="search-section card">
+    <input 
+      class="search-input" 
+      placeholder="搜索区域名称"
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearch"
+    />
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+
+  <!-- 区域列表 -->
+  <view class="region-list">
+    <view 
+      class="region-item card" 
+      wx:for="{{regions}}" 
+      wx:key="id"
+    >
+      <view class="region-info">
+        <view class="region-name">{{item.name}}</view>
+        <view class="region-desc">{{item.description || '暂无描述'}}</view>
+      </view>
+      <view class="region-actions">
+        <button class="btn-edit" size="mini" bindtap="onEdit" data-id="{{item.id}}">编辑</button>
+        <button class="btn-delete" size="mini" bindtap="onDelete" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && regions.length === 0}}">
+      <text>暂无区域数据</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </view>
+
+  <!-- 添加区域按钮 -->
+  <view class="add-btn-container">
+    <button class="add-btn" bindtap="onAdd">+ 添加区域</button>
+  </view>
+</view>
+
+<!-- 表单弹窗 -->
+<view class="modal" wx:if="{{showModal}}">
+  <view class="modal-mask" bindtap="onModalClose"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑区域' : '添加区域'}}</text>
+      <text class="modal-close" bindtap="onModalClose">×</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">区域名称 *</text>
+        <input class="form-input" placeholder="请输入区域名称" value="{{formData.name}}" data-field="name" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">描述</text>
+        <textarea class="form-textarea" placeholder="请输入区域描述" value="{{formData.description}}" data-field="description" bindinput="onFormInput" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="btn-cancel" bindtap="onModalClose">取消</button>
+      <button class="btn-confirm" bindtap="onSubmit">确定</button>
+    </view>
   </view>
 </view>

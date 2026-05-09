@@ -1,11 +1,22 @@
 // app.js
 const authService = require("./utils/auth");
 
+// 根据环境自动选择API地址
+const getBaseUrl = () => {
+  // 开发环境：使用 localhost
+  // 生产环境：使用相对路径
+  if (typeof wx !== 'undefined') {
+    // 小程序环境
+    return "http://localhost:80/api/v1";
+  }
+  return "http://localhost:80/api/v1";
+};
+
 App({
   globalData: {
     userInfo: null,
     token: null,
-    baseUrl: "https://api.example.com/api/v1", // 修改为实际API地址
+    baseUrl: getBaseUrl(),
   },
 
   onLaunch() {

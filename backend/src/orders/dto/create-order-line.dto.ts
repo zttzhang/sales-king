@@ -1,25 +1,7 @@
-﻿import {
-  IsNotEmpty,
-  IsNumber,
-  IsPositive,
-  IsString,
-  IsOptional,
-} from 'class-validator';
-
-export class CreateOrderLineDto {
-  @IsString()
-  @IsNotEmpty()
+﻿export class CreateOrderLineDto {
   productId: string;
-
-  @IsNumber()
-  @IsPositive()
-  quantity: number;
-
-  @IsNumber()
-  @IsPositive()
-  unitPrice: number;
-
-  @IsOptional()
-  @IsNumber()
+  qty: number;
+  price: number;
   discountAmount?: number;
+  lineAmount?: number;
 }

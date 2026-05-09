@@ -4,14 +4,6 @@
 const request = require("../utils/request");
 
 /**
- * 获取我的拜访统计
- * @param {string} range - 时间范围：today|week|month
- */
-function getMyVisits(range = "today") {
-  return request.get("/stats/my/visits", { range });
-}
-
-/**
  * 获取我的销售统计
  * @param {string} range - 时间范围：today|week|month
  */
@@ -38,7 +30,6 @@ function getTopProducts(range = "month", limit = 10) {
 }
 
 module.exports = {
-  getMyVisits,
   getMySales,
   getTopStores,
   getTopProducts,

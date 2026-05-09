@@ -1,16 +1,30 @@
 // pages/stores/list/list.js
 const storesApi = require('../../../api/stores');
 const util = require('../../../utils/util');
+const authService = require('../../../utils/auth');
 
 Page({
-   {
+  data: {
     stores: [],
     keyword: '',
-    loading: false
+    loading: false,
+    isAdmin: false
   },
 
   onLoad() {
+    this.checkAdminStatus();
     this.loadStores();
+  },
+
+  onShow() {
+    this.checkAdminStatus();
+    this.loadStores();
+  },
+
+  checkAdminStatus() {
+    const userInfo = authService.getUserInfo();
+    const isAdmin = userInfo && userInfo.role === 'admin';
+    this.setData({ isAdmin });
   },
 
   onPullDownRefresh() {

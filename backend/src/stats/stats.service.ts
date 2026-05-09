@@ -5,17 +5,6 @@ import { PrismaService } from '../prisma/prisma.service';
 export class StatsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getMyVisitsStats(userId: string, range: 'today' | 'week' | 'month') {
-    const { startDate } = this.getDateRange(range);
-    const visitsCount = await this.prisma.visit.count({
-      where: { visitorUserId: userId, visitTime: { gte: startDate } },
-    });
-    const orderedVisitsCount = await this.prisma.salesOrder.count({
-      where: { createdByUserId: userId, orderDate: { gte: startDate } },
-    });
-    return { visitsCount, orderedVisitsCount, range };
-  }
-
   async getMySalesStats(userId: string, range: 'today' | 'week' | 'month') {
     const { startDate } = this.getDateRange(range);
     const orders = await this.prisma.salesOrder.findMany({

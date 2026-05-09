@@ -1,10 +1,13 @@
-﻿import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+﻿import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateProductDto {
   @IsOptional()
   @IsString()
-  @IsNotEmpty()
   name?: string;
+
+  @IsOptional()
+  @IsString()
+  code?: string;
 
   @IsOptional()
   @IsString()
@@ -13,4 +16,12 @@ export class UpdateProductDto {
   @IsOptional()
   @IsNumber()
   defaultPrice?: number;
+
+  @IsOptional()
+  @IsString()
+  unit?: string;
+
+  @IsOptional()
+  @IsString()
+  spec?: string;
 }

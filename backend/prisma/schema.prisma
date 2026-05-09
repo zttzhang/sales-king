@@ -54,10 +54,14 @@ model Region {
 model Store {
   id        String       @id @default(cuid())
   name      String
-  regionId  String
-  region    Region       @relation(fields: [regionId], references: [id])
-  address   String
+  regionId  String?
+  region    Region?      @relation(fields: [regionId], references: [id])
+  address   String?
   notes     String?
+  latitude  Float?
+  longitude Float?
+  contactName String?
+  contactPhone String?
   visits    Visit[]
   orders    SalesOrder[]
   createdAt DateTime     @default(now())

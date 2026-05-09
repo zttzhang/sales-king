@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsString } from 'class-validator';
+﻿import { IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class UpdateStoreDto {
   @IsOptional()
@@ -16,4 +16,20 @@ export class UpdateStoreDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @IsOptional()
+  @IsNumber()
+  latitude?: number;
+
+  @IsOptional()
+  @IsNumber()
+  longitude?: number;
+
+  @IsOptional()
+  @IsString()
+  contactName?: string;
+
+  @IsOptional()
+  @IsString()
+  contactPhone?: string;
 }

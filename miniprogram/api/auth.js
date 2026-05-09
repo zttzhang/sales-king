@@ -5,14 +5,14 @@ const request = require("../utils/request");
 
 /**
  * 登录（账号密码方式）
- * @param {string} username - 用户名
+ * @param {string} username - 用户名（邮箱）
  * @param {string} password - 密码
  */
 function login(username, password) {
   return request.post(
     "/auth/login",
     {
-      username,
+      email: username,  // 后端使用 email 字段
       password,
     },
     false,

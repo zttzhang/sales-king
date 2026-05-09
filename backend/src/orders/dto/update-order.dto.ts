@@ -1,39 +1,16 @@
-﻿import {
-  IsArray,
-  IsDateString,
-  IsEnum,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
-import { Type } from 'class-transformer';
-import { CreateOrderLineDto } from './create-order-line.dto';
-import { OrderStatus } from '@prisma/client';
-
-export class UpdateOrderDto {
-  @IsOptional()
-  @IsString()
+﻿export class UpdateOrderDto {
   storeId?: string;
-
-  @IsOptional()
-  @IsString()
   customerId?: string;
-
-  @IsOptional()
-  @IsDateString()
   orderDate?: string;
-
-  @IsOptional()
-  @IsString()
   notes?: string;
+  status?: string;
+  lines?: UpdateOrderLineDto[];
+}
 
-  @IsOptional()
-  @IsEnum(OrderStatus)
-  status?: OrderStatus;
-
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateOrderLineDto)
-  lines?: CreateOrderLineDto[];
+interface UpdateOrderLineDto {
+  productId: string;
+  qty: number;
+  price: number;
+  discountAmount?: number;
+  lineAmount?: number;
 }

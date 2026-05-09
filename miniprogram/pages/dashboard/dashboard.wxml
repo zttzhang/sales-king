@@ -25,21 +25,6 @@
     </view>
   </view>
 
-  <!-- 拜访统计 -->
-  <view class="stat-section">
-    <view class="section-title">拜访统计</view>
-    <view class="stat-cards">
-      <view class="stat-card stat-card-primary">
-        <view class="stat-value">{{visitStats.visitsCount || 0}}</view>
-        <view class="stat-label">拜访次数</view>
-      </view>
-      <view class="stat-card stat-card-success">
-        <view class="stat-value">{{visitStats.orderedVisitsCount || 0}}</view>
-        <view class="stat-label">下单次数</view>
-      </view>
-    </view>
-  </view>
-
   <!-- 销售统计 -->
   <view class="stat-section">
     <view class="section-title">销售统计</view>
@@ -67,27 +52,31 @@
         <text class="nav-icon">🏪</text>
         <text class="nav-text">门店</text>
       </navigator>
-      <navigator url="/pages/visits/list/list" class="nav-item">
-        <text class="nav-icon">📝</text>
-        <text class="nav-text">拜访</text>
-      </navigator>
       <navigator url="/pages/orders/list/list" class="nav-item">
         <text class="nav-icon">📦</text>
         <text class="nav-text">订单</text>
       </navigator>
-      <navigator url="/pages/visits/create/create" class="nav-item">
+      <navigator url="/pages/orders/create/create" class="nav-item">
         <text class="nav-icon">➕</text>
-        <text class="nav-text">新建拜访</text>
+        <text class="nav-text">新建订单</text>
       </navigator>
     </view>
   </view>
 
-  <!-- 管理员入口 -->
-  <view class="admin-section" wx:if="{{isAdmin}}">
-    <navigator url="/pages/admin/menu/menu" class="admin-link">
-      <text>🔧 管理员功能</text>
-      <text class="arrow">›</text>
-    </navigator>
+  <!-- 管理员功能 -->
+  <view class="admin-section card">
+    <view class="section-title">管理员功能</view>
+    <view class="admin-menu">
+      <navigator url="/pages/admin/stores/stores" class="admin-item">
+        <text>🏪 门店管理</text>
+      </navigator>
+      <navigator url="/pages/admin/products/products" class="admin-item">
+        <text>📦 商品管理</text>
+      </navigator>
+      <navigator url="/pages/admin/regions/regions" class="admin-item">
+        <text>🗺️ 区域管理</text>
+      </navigator>
+    </view>
   </view>
 
   <!-- 加载状态 -->
@@ -96,7 +85,7 @@
   </view>
 
   <!-- 空状态 -->
-  <view class="empty-state" wx:if="{{!loading && !visitStats.visitsCount && !salesStats.ordersCount}}">
+  <view class="empty-state" wx:if="{{!loading && !salesStats.ordersCount}}">
     <text>暂无数据</text>
   </view>
 </view>

@@ -56,7 +56,7 @@ async function main() {
 
   // Create sample stores
   const store1 = await prisma.store.create({
-     {
+    data: {
       name: '上海旗舰店',
       regionId: regions[0].id,
       address: '上海市浦东新区世纪大道100号',
@@ -64,7 +64,7 @@ async function main() {
     },
   });
   const store2 = await prisma.store.create({
-     {
+    data: {
       name: '杭州西湖店',
       regionId: regions[0].id,
       address: '浙江省杭州市西湖区文三路50号',
@@ -80,7 +80,7 @@ async function main() {
     },
   });
   const store4 = await prisma.store.create({
-     {
+    data: {
       name: '北京朝阳店',
       regionId: regions[2].id,
       address: '北京市朝阳区建国路88号',
@@ -92,35 +92,35 @@ async function main() {
 
   // Create sample products
   const product1 = await prisma.product.create({
-     {
+    data: {
       name: '经典款T恤',
       productLine: '服装',
       defaultPrice: 99.0,
     },
   });
   const product2 = await prisma.product.create({
-     {
+    data: {
       name: '运动鞋',
       productLine: '鞋类',
       defaultPrice: 299.0,
     },
   });
   const product3 = await prisma.product.create({
-     {
+    data: {
       name: '休闲裤',
       productLine: '服装',
       defaultPrice: 199.0,
     },
   });
   const product4 = await prisma.product.create({
-     {
+    data: {
       name: '双肩包',
       productLine: '配件',
       defaultPrice: 159.0,
     },
   });
   const product5 = await prisma.product.create({
-     {
+    data: {
       name: '棒球帽',
       productLine: '配件',
       defaultPrice: 59.0,
@@ -131,19 +131,19 @@ async function main() {
 
   // Create sample customers
   const customer1 = await prisma.customer.create({
-     {
+    data: {
       name: '张三',
       type: 'VIP',
     },
   });
   const customer2 = await prisma.customer.create({
-     {
+    data: {
       name: '李四',
       type: '普通',
     },
   });
   const customer3 = await prisma.customer.create({
-     {
+    data: {
       name: '王五',
       type: '会员',
     },
@@ -153,7 +153,7 @@ async function main() {
 
   // Create sample visits
   await prisma.visit.create({
-     {
+    data: {
       storeId: stores[0].id,
       visitTime: new Date('2026-05-08T09:00:00Z'),
       visitorUserId: sales.id,
@@ -162,7 +162,7 @@ async function main() {
     },
   });
   await prisma.visit.create({
-     {
+    data: {
       storeId: stores[1].id,
       visitTime: new Date('2026-05-08T10:30:00Z'),
       visitorUserId: sales.id,
@@ -174,7 +174,7 @@ async function main() {
 
   // Create sample orders
   await prisma.salesOrder.create({
-     {
+    data: {
       storeId: stores[0].id,
       customerId: customers[0].id,
       orderDate: new Date('2026-05-08'),

@@ -20,10 +20,7 @@
   </view>
 
   <view class="action-section">
-    <navigator url="/pages/visits/create/create?storeId={{storeId}}" class="btn-primary">
-      新建拜访
-    </navigator>
-    <navigator url="/pages/orders/create/create?storeId={{storeId}}" class="btn-primary mt-20">
+    <navigator url="/pages/orders/create/create?storeId={{storeId}}" class="btn-primary">
       新建订单
     </navigator>
   </view>

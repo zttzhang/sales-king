@@ -1,16 +1,15 @@
 <!--pages/login/login.wxml-->
 <view class="container login-container">
   <view class="logo-section">
-    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
     <text class="app-name">销售管理系统</text>
   </view>
 
   <view class="form-section card">
     <view class="form-item">
-      <text class="form-label required">用户名</text>
+      <text class="form-label required">邮箱</text>
       <input 
         class="form-input" 
-        placeholder="请输入用户名" 
+        placeholder="请输入邮箱" 
         value="{{username}}"
         bindinput="onUsernameInput"
       />
@@ -32,7 +31,7 @@
     </button>
   </view>
 
-  <view class="tips">
-    <text class="text-muted">默认管理员账号: admin / admin123</text>
+    <view class="tips">
+    <text class="text-muted">默认管理员: admin@example.com / admin123</text>
   </view>
 </view>

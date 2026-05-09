@@ -8,14 +8,6 @@ import type { AuthRequest } from '../auth/auth.types';
 export class StatsController {
   constructor(private readonly statsService: StatsService) {}
 
-  @Get('my/visits')
-  getMyVisitsStats(
-    @Request() req: AuthRequest,
-    @Query('range') range: 'today' | 'week' | 'month' = 'today',
-  ) {
-    return this.statsService.getMyVisitsStats(req.user.userId, range);
-  }
-
   @Get('my/sales')
   getMySalesStats(
     @Request() req: AuthRequest,

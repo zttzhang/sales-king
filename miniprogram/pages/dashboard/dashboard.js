@@ -6,7 +6,6 @@ const app = getApp();
 Page({
   data: {
     selectedRange: "today",
-    visitStats: {},
     salesStats: {},
     loading: false,
     isAdmin: false,
@@ -48,14 +47,9 @@ Page({
     this.setData({ loading: true });
 
     try {
-      // 并行请求拜访统计和销售统计
-      const [visitStats, salesStats] = await Promise.all([
-        statsApi.getMyVisits(selectedRange),
-        statsApi.getMySales(selectedRange),
-      ]);
+      const salesStats = await statsApi.getMySales(selectedRange);
 
       this.setData({
-        visitStats,
         salesStats,
         loading: false,
       });

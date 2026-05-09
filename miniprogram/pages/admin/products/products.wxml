@@ -1,6 +1,90 @@
 <!--pages/admin/products/products.wxml-->
 <view class="container">
-  <view class="card">
-    <text class="section-title">商品管理功能开发中...</text>
+  <!-- 搜索区域 -->
+  <view class="search-section card">
+    <input 
+      class="search-input" 
+      placeholder="搜索商品名称/编码"
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearch"
+    />
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="product-list">
+    <view 
+      class="product-item card" 
+      wx:for="{{products}}" 
+      wx:key="id"
+    >
+      <view class="product-info">
+        <view class="product-name">{{item.name}}</view>
+        <view class="product-code">编码: {{item.code || '暂无'}}</view>
+        <view class="product-price">单价: ¥{{item.defaultPrice || '0.00'}}</view>
+        <view class="product-unit">单位: {{item.unit || '件'}}</view>
+      </view>
+      <view class="product-actions">
+        <button class="btn-edit" size="mini" bindtap="onEdit" data-id="{{item.id}}">编辑</button>
+        <button class="btn-delete" size="mini" bindtap="onDelete" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && products.length === 0}}">
+      <text>暂无商品数据</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </view>
+
+  <!-- 添加商品按钮 -->
+  <view class="add-btn-container">
+    <button class="add-btn" bindtap="onAdd">+ 添加商品</button>
+  </view>
+</view>
+
+<!-- 表单弹窗 -->
+<view class="modal" wx:if="{{showModal}}">
+  <view class="modal-mask" bindtap="onModalClose"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑商品' : '添加商品'}}</text>
+      <text class="modal-close" bindtap="onModalClose">×</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-item">
+        <text class="form-label">商品名称 *</text>
+        <input class="form-input" placeholder="请输入商品名称" value="{{formData.name}}" data-field="name" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">商品编码</text>
+        <input class="form-input" placeholder="请输入商品编码" value="{{formData.code}}" data-field="code" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">单价</text>
+        <input class="form-input" type="digit" placeholder="请输入单价" value="{{formData.defaultPrice}}" data-field="defaultPrice" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">单位</text>
+        <input class="form-input" placeholder="如: 件/箱/个" value="{{formData.unit}}" data-field="unit" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">产品线</text>
+        <input class="form-input" placeholder="请输入产品线" value="{{formData.productLine}}" data-field="productLine" bindinput="onFormInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">规格</text>
+        <input class="form-input" placeholder="请输入规格" value="{{formData.spec}}" data-field="spec" bindinput="onFormInput" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="btn-cancel" bindtap="onModalClose">取消</button>
+      <button class="btn-confirm" bindtap="onSubmit">确定</button>
+    </view>
   </view>
 </view>

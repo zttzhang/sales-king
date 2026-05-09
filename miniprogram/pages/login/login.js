@@ -12,7 +12,7 @@ Page({
   onLoad() {
     // 检查是否已登录
     if (app.globalData.token) {
-      wx.switchTab({
+      wx.reLaunch({
         url: "/pages/dashboard/dashboard",
       });
     }
@@ -48,7 +48,7 @@ Page({
       const res = await authApi.login(username, password);
 
       // 保存用户信息和token
-      app.setUserInfo(res.user, res.token);
+      app.setUserInfo(res.user, res.access_token);
 
       wx.showToast({
         title: "登录成功",
@@ -57,7 +57,7 @@ Page({
 
       // 跳转到首页
       setTimeout(() => {
-        wx.switchTab({
+        wx.reLaunch({
           url: "/pages/dashboard/dashboard",
         });
       }, 1500);

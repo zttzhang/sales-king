@@ -1,10 +1,22 @@
 <!--pages/orders/list/list.wxml-->
 <view class="container">
-  <view class="list-item" wx:for="{{orders}}" wx:key="orderId">
-    <view class="list-item-title">{{item.storeName}}</view>
-    <view class="list-item-desc">
-      <text>{{item.orderDate}}</text>
-      <text class="text-primary ml-10">¥{{item.totalAmount}}</text>
+  <view class="list-header">
+    <text>共 {{orders.length}} 个订单</text>
+  </view>
+  
+  <view class="list-item" wx:for="{{orders}}" wx:key="id" bindtap="onViewDetail" data-id="{{item.id}}">
+    <view class="list-item-content">
+      <view class="list-item-header">
+        <text class="store-name">{{item.storeName}}</text>
+        <text class="order-amount">¥{{item.totalAmount}}</text>
+      </view>
+      <view class="list-item-body">
+        <text class="order-date">{{item.orderDate}}</text>
+        <text class="order-qty">共 {{item.totalQty || 0}} 件</text>
+      </view>
+      <view class="list-item-footer" wx:if="{{item.status}}">
+        <text class="order-status status-{{item.status}}">{{getStatusText(item.status)}}</text>
+      </view>
     </view>
   </view>
 

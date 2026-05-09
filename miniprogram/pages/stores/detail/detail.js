@@ -2,7 +2,7 @@
 const storesApi = require('../../../api/stores');
 
 Page({
-   {
+  data: {
     storeId: '',
     store: null,
     loading: false

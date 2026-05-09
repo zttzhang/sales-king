@@ -1,9 +1,12 @@
-﻿import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+﻿import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
-  @IsNotEmpty()
   name: string;
+
+  @IsOptional()
+  @IsString()
+  code?: string;
 
   @IsOptional()
   @IsString()
@@ -12,4 +15,12 @@ export class CreateProductDto {
   @IsOptional()
   @IsNumber()
   defaultPrice?: number;
+
+  @IsOptional()
+  @IsString()
+  unit?: string;
+
+  @IsOptional()
+  @IsString()
+  spec?: string;
 }
