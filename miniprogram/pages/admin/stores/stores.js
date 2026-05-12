@@ -19,7 +19,10 @@ Page({
       contactName: '',
       contactPhone: ''
     },
-    selectedRegionName: ''
+    selectedRegionName: '',
+    page: 1,
+    pageSize: 20,
+    hasMore: true
   },
 
   onLoad() {
@@ -41,21 +44,41 @@ Page({
     this.loadStores();
   },
 
-  async loadStores() {
-    const { keyword } = this.data;
+  async loadStores(refresh = false) {
+    const { keyword, page, pageSize } = this.data;
     this.setData({ loading: true });
 
     try {
-      const stores = await storesApi.getStores({ keyword });
+      const params = { 
+        keyword,
+        page: refresh ? 1 : page,
+        pageSize 
+      };
+      const result = await storesApi.getStores(params);
+      
+      // 假设 API 返回 { data: [], total: 0 } 或直接返回数组
+      const stores = Array.isArray(result) ? result : (result.data || []);
+      
       this.setData({
         stores,
-        loading: false
+        loading: false,
+        page: params.page,
+        hasMore: stores.length >= pageSize
       });
     } catch (error) {
       console.error('加载门店列表失败:', error);
       wx.showToast({ title: '加载失败', icon: 'none' });
       this.setData({ loading: false });
     }
+  },
+
+  onReachBottom() {
+    if (!this.data.hasMore || this.data.loading) return;
+    
+    const nextPage = this.data.page + 1;
+    this.setData({ page: nextPage }, () => {
+      this.loadStores();
+    });
   },
 
   async loadRegions() {

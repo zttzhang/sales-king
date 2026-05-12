@@ -8,7 +8,7 @@ import { UpdateStoreDto } from './dto/update-store.dto';
 export class StoresService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll(keyword?: string, regionId?: string) {
+  findAll(keyword?: string, regionId?: string, page = 1, pageSize = 20) {
     const where: Prisma.StoreWhereInput = {};
     if (keyword) {
       where.OR = [
@@ -20,11 +20,43 @@ export class StoresService {
       where.regionId = regionId;
     }
 
+    const skip = (page - 1) * pageSize;
+
     return this.prisma.store.findMany({
       where,
       orderBy: { name: 'asc' },
       include: { region: true },
+      skip,
+      take: pageSize,
     });
+  }
+
+  async findAllWithCount(keyword?: string, regionId?: string, page = 1, pageSize = 20) {
+    const where: Prisma.StoreWhereInput = {};
+    if (keyword) {
+      where.OR = [
+        { name: { contains: keyword, mode: 'insensitive' } },
+        { address: { contains: keyword, mode: 'insensitive' } },
+      ];
+    }
+    if (regionId) {
+      where.regionId = regionId;
+    }
+
+    const skip = (page - 1) * pageSize;
+
+    const [data, total] = await Promise.all([
+      this.prisma.store.findMany({
+        where,
+        orderBy: { name: 'asc' },
+        include: { region: true },
+        skip,
+        take: pageSize,
+      }),
+      this.prisma.store.count({ where }),
+    ]);
+
+    return { data, total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
   }
 
   async findOne(id: string) {
