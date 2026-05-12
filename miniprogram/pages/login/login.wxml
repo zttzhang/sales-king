@@ -31,7 +31,5 @@
     </button>
   </view>
 
-    <view class="tips">
-    <text class="text-muted">默认管理员: admin@example.com / admin123</text>
-  </view>
+·
 </view>
