@@ -3,13 +3,13 @@ const authService = require("./utils/auth");
 
 // 根据环境自动选择API地址
 const getBaseUrl = () => {
-  // 开发环境：使用 localhost
-  // 生产环境：使用相对路径
+  // 生产环境：使用 HTTPS 域名
   if (typeof wx !== 'undefined') {
-    // 小程序环境
-    return "http://localhost:80/api/v1";
+    // 小程序环境 - 使用 HTTPS
+    return "https://pineai.cloud/api/v1";
   }
-  return "http://localhost:80/api/v1";
+  // 备选：相对路径（通过 nginx 代理）
+  return "/api/v1";
 };
 
 App({
