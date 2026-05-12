@@ -174,4 +174,51 @@ export class OrdersService {
     await this.findOne(id, userId, userRole);
     return this.prisma.salesOrder.delete({ where: { id } });
   }
+
+  async findAllWithCount(
+    userId: string,
+    userRole: string,
+    from?: string,
+    to?: string,
+    storeId?: string,
+    productId?: string,
+    page = 1,
+    pageSize = 20,
+  ) {
+    const where: Prisma.SalesOrderWhereInput = {};
+    if (userRole === 'SALES') {
+      where.createdByUserId = userId;
+    }
+    if (storeId) {
+      where.storeId = storeId;
+    }
+    if (from || to) {
+      where.orderDate = {};
+      if (from) where.orderDate.gte = new Date(from);
+      if (to) where.orderDate.lte = new Date(to);
+    }
+    if (productId) {
+      where.lines = { some: { productId } };
+    }
+
+    const skip = (page - 1) * pageSize;
+
+    const [data, total] = await Promise.all([
+      this.prisma.salesOrder.findMany({
+        where,
+        include: {
+          store: true,
+          customer: true,
+          createdBy: true,
+          lines: { include: { product: true } },
+        },
+        orderBy: { orderDate: 'desc' },
+        skip,
+        take: pageSize,
+      }),
+      this.prisma.salesOrder.count({ where }),
+    ]);
+
+    return { data, total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
+  }
 }

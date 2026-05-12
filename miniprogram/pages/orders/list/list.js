@@ -5,36 +5,53 @@ const util = require('../../../utils/util');
 Page({
   data: {
     orders: [],
-    loading: false
+    loading: false,
+    page: 1,
+    pageSize: 20,
+    hasMore: true
   },
 
   onLoad() {
-    this.loadOrders();
+    this.loadOrders(true);
   },
 
   onShow() {
     // 每次显示页面时刷新数据
-    this.loadOrders();
+    this.loadOrders(true);
   },
 
   onPullDownRefresh() {
-    this.loadOrders().then(() => {
+    this.loadOrders(true).then(() => {
       wx.stopPullDownRefresh();
     });
   },
 
-  async loadOrders() {
+  onReachBottom() {
+    if (!this.data.hasMore || this.data.loading) return;
+    this.loadOrders(false);
+  },
+
+  async loadOrders(refresh = false) {
+    const { page, pageSize } = this.data;
     this.setData({ loading: true });
 
     try {
+      const pageNum = refresh ? 1 : page;
       const orders = await ordersApi.getOrders({
         from: util.getMonthStartDate(),
-        to: util.getTodayDate()
+        to: util.getTodayDate(),
+        page: pageNum,
+        pageSize: pageSize
       });
 
+      const ordersData = Array.isArray(orders) ? orders : (orders.data || []);
+      const newOrders = refresh ? ordersData : [...this.data.orders, ...ordersData];
+
       this.setData({
-        orders,
-        loading: false
+        orders: newOrders,
+        loading: false,
+        page: pageNum,
+        hasMore: ordersData.length >= pageSize
       });
     } catch (error) {
       console.error('加载订单列表失败:', error);

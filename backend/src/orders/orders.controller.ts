@@ -28,14 +28,20 @@ export class OrdersController {
     @Query('to') to?: string,
     @Query('storeId') storeId?: string,
     @Query('productId') productId?: string,
+    @Query('page') page?: string,
+    @Query('pageSize') pageSize?: string,
   ) {
-    return this.ordersService.findAll(
+    const pageNum = page ? parseInt(page, 10) : 1;
+    const pageSizeNum = pageSize ? parseInt(pageSize, 10) : 20;
+    return this.ordersService.findAllWithCount(
       req.user.userId,
       req.user.role,
       from,
       to,
       storeId,
       productId,
+      pageNum,
+      pageSizeNum,
     );
   }
 
